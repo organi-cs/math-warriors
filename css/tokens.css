@@ -1,0 +1,85 @@
+/* ═══════════════════════════════════════════════════
+   TOKENS — Chess.com inspired
+   
+   Direction: Clean competitive game UI
+   Palette: Forest green primary, warm dark neutrals
+   Depth: Subtle shadows on panels, flat board
+   Spacing: 8px base
+   Radius: 8px standard, 12px cards
+   ═══════════════════════════════════════════════════ */
+
+:root {
+    /* ── Surfaces ── */
+    --bg:       #262421;     /* page background — chess.com brown-black */
+    --bg-board: #312e2b;     /* board background */
+    --panel:    #1d1b19;     /* side panel */
+    --card:     #262421;
+    --surface:  #302d2a;
+    --surface-h: #3a3734;    /* hover */
+    --surface-a: #44413d;    /* active/pressed */
+
+    /* ── Board squares ── */
+    --sq-light: #eeeed2;     /* light square */
+    --sq-dark:  #769656;     /* dark square — chess.com green */
+
+    /* ── Text ── */
+    --text:      #f0f0f0;
+    --text-2:    #bababa;
+    --text-3:    #8b8987;
+    --text-4:    #5c5955;
+
+    /* ── Accents ── */
+    --green:     #81b64c;    /* chess.com green — primary CTA */
+    --green-d:   #629b34;
+    --green-bg:  rgba(129,182,76,0.12);
+
+    --red:       #e04040;
+    --red-d:     #b83030;
+    --red-bg:    rgba(224,64,64,0.1);
+
+    --amber:     #f0c040;
+    --amber-d:   #c89e2e;
+    --amber-bg:  rgba(240,192,64,0.1);
+
+    --blue:      #5c9ae0;
+    --blue-bg:   rgba(92,154,224,0.1);
+
+    /* ── Borders ── */
+    --b1: rgba(255,255,255,0.06);
+    --b2: rgba(255,255,255,0.1);
+    --b3: rgba(255,255,255,0.15);
+
+    /* ── Spacing (8px) ── */
+    --sp-1: 4px;
+    --sp-2: 8px;
+    --sp-3: 12px;
+    --sp-4: 16px;
+    --sp-5: 20px;
+    --sp-6: 24px;
+    --sp-8: 32px;
+    --sp-10: 40px;
+
+    /* ── Radius ── */
+    --r:    8px;
+    --r-lg: 12px;
+    --r-sm: 4px;
+
+    /* ── Shadows ── */
+    --sh: 0 2px 8px rgba(0,0,0,0.3);
+    --sh-lg: 0 8px 24px rgba(0,0,0,0.4);
+
+    /* ── Typography ── */
+    --f-sans: 'Inter', -apple-system, sans-serif;
+    --f-mono: 'JetBrains Mono', monospace;
+
+    --fs-xl:  1.35rem;
+    --fs-lg:  1rem;
+    --fs-md:  0.875rem;
+    --fs-sm:  0.8rem;
+    --fs-xs:  0.72rem;
+    --fs-2xs: 0.65rem;
+
+    /* ── Motion ── */
+    --ease: cubic-bezier(0.22,0.61,0.36,1);
+    --dur: 0.15s;
+}

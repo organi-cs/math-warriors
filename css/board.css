@@ -1,0 +1,145 @@
+/* ═══════════════════════════════════════════════════
+   BOARD — Vertical dice board, chess.com style
+   ═══════════════════════════════════════════════════ */
+
+/* Main layout: board left, panel right */
+.game-layout{
+    display:grid;
+    grid-template-columns:auto 380px;
+    justify-content:center;
+    gap:0;
+    min-height:100vh;
+    padding:var(--sp-4);
+}
+
+@media(max-width:860px){
+    .game-layout{
+        grid-template-columns:1fr;
+        max-width:500px;
+        margin:0 auto;
+    }
+}
+
+/* ── Board column ── */
+.board-column{
+    display:flex;
+    flex-direction:column;
+    gap:0;
+    align-self:center;
+}
+
+/* ── Player bars (above/below board) ── */
+.player-bar{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:var(--sp-2) var(--sp-3);
+    background:var(--panel);
+}
+.player-bar--opp{border-radius:var(--r) var(--r) 0 0}
+.player-bar--you{border-radius:0 0 var(--r) var(--r)}
+
+.bar-left{display:flex;align-items:center;gap:var(--sp-2)}
+
+.avatar{
+    width:32px;height:32px;border-radius:var(--r-sm);
+    display:flex;align-items:center;justify-content:center;
+    font-weight:800;font-size:var(--fs-sm);
+}
+.avatar--you{background:var(--green);color:#fff}
+.avatar--opp{background:var(--red);color:#fff}
+
+.bar-info{display:flex;align-items:center;gap:var(--sp-2)}
+.bar-name{font-size:var(--fs-sm);font-weight:700}
+.bar-badge{font-size:var(--fs-2xs);font-weight:600;color:var(--text-3);background:var(--surface);padding:1px 6px;border-radius:var(--r-sm)}
+.first-tag{font-size:var(--fs-2xs);font-weight:700;color:var(--amber);background:var(--amber-bg);padding:1px 6px;border-radius:var(--r-sm);border:1px solid rgba(240,192,64,0.2)}
+
+.bar-dice{font-family:var(--f-mono);font-size:var(--fs-sm);color:var(--text-3);font-weight:600}
+
+/* ── Board itself ── */
+.board{
+    background:var(--bg-board);
+    aspect-ratio:auto;
+    user-select:none;
+}
+
+.board-half{padding:var(--sp-4);position:relative;overflow:hidden}
+.board-label{
+    font-size:var(--fs-2xs);font-weight:700;color:var(--text-4);
+    text-transform:uppercase;letter-spacing:0.08em;
+    padding:var(--sp-1) 0;
+}
+.board-half--opp .board-label{text-align:right}
+
+/* ── Divider ── */
+.board-divider{
+    display:flex;align-items:center;justify-content:center;
+    padding:var(--sp-1) 0;
+    position:relative;
+}
+.board-divider::before,.board-divider::after{
+    content:'';flex:1;height:1px;background:var(--b2);
+}
+.divider-icon{
+    padding:0 var(--sp-3);font-size:1rem;color:var(--text-4);
+}
+
+/* ── Dice row — 6 dice in a 3×2 grid ── */
+.dice-row{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:4px;
+}
+
+/* ── Die — chess.com square-like ── */
+.die{
+    aspect-ratio:1;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    border-radius:var(--r-sm);
+    cursor:pointer;position:relative;
+    min-height:80px;
+    transition:all var(--dur) var(--ease);
+    border:2px solid transparent;
+}
+
+/* Alternating colors like a chess board */
+.die:nth-child(odd) { background:var(--sq-dark) }
+.die:nth-child(even){ background:var(--sq-light) }
+.die:nth-child(even) .die-value{ color:#333 }
+.die:nth-child(even) .die-label{ color:#666 }
+.die:nth-child(even) .die-key { color:#888 }
+
+.die:hover:not(.captured){
+    filter:brightness(1.1);
+    transform:scale(1.03);
+}
+
+.die.selected{
+    border-color:var(--amber);
+    box-shadow:0 0 0 2px var(--amber),inset 0 0 12px rgba(240,192,64,0.15);
+}
+.die.target{
+    border-color:var(--red);
+    box-shadow:0 0 0 2px var(--red),inset 0 0 12px rgba(224,64,64,0.15);
+}
+
+.die-key{
+    position:absolute;top:3px;right:5px;
+    font-family:var(--f-mono);font-size:var(--fs-2xs);font-weight:700;color:rgba(255,255,255,0.5);
+}
+
+.die-value{
+    font-family:var(--f-mono);font-size:clamp(1.2rem,3vw,1.7rem);font-weight:800;color:#fff;
+    text-shadow:0 1px 2px rgba(0,0,0,0.3);
+}
+.die.captured .die-value{color:var(--text-4);text-shadow:none}
+
+.die-label{
+    font-size:var(--fs-2xs);font-weight:700;color:rgba(255,255,255,0.6);
+    letter-spacing:0.04em;margin-top:1px;
+}
+
+
+.die.rolling{animation:die-roll 0.35s var(--ease)}
+@keyframes die-roll{
+    0%{transform:scale(1)} 30%{transform:scale(0.85);opacity:0.5}
+    70%{transform:scale(1.05)} 100%{transform:scale(1);opacity:1}
+}

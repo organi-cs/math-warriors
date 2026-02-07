@@ -1,0 +1,42 @@
+/* MODALS */
+.modal-overlay{
+    position:fixed;inset:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(4px);
+    display:flex;align-items:center;justify-content:center;padding:var(--sp-6);z-index:200;
+    opacity:0;visibility:hidden;transition:opacity 0.2s var(--ease),visibility 0.2s var(--ease);
+}
+.modal-overlay.active{opacity:1;visibility:visible}
+
+.modal-card{
+    background:var(--panel);border:1px solid var(--b2);border-radius:var(--r-lg);
+    padding:var(--sp-8);text-align:center;max-width:400px;width:100%;
+    box-shadow:var(--sh-lg);transform:scale(0.94);transition:transform 0.2s var(--ease);
+}
+.modal-overlay.active .modal-card{transform:scale(1)}
+.modal-card--sm{max-width:340px;padding:var(--sp-6)}
+
+.modal-result{font-size:2.5rem;margin-bottom:var(--sp-3);line-height:1}
+.modal-title{font-size:var(--fs-xl);font-weight:800;margin-bottom:var(--sp-2)}
+.modal-title.win{color:var(--green)}
+.modal-title.lose{color:var(--red)}
+.modal-sub{font-size:var(--fs-sm);color:var(--text-3);margin-bottom:var(--sp-5)}
+
+/* Post-game stats */
+.postgame{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-2);
+    margin-bottom:var(--sp-6);text-align:center;
+}
+.pg-stat{background:var(--surface);border-radius:var(--r);padding:var(--sp-2)}
+.pg-val{font-family:var(--f-mono);font-size:var(--fs-lg);font-weight:800;color:var(--text)}
+.pg-label{font-size:var(--fs-2xs);color:var(--text-4);margin-top:1px}
+
+.modal-btns{display:flex;gap:var(--sp-2)}
+.modal-btn{
+    flex:1;padding:var(--sp-3) var(--sp-4);border-radius:var(--r);
+    font-size:var(--fs-sm);font-weight:700;color:var(--text-3);
+    background:var(--surface);border:1px solid var(--b1);transition:all var(--dur) var(--ease);
+}
+.modal-btn:hover{background:var(--surface-h);color:var(--text-2)}
+.modal-btn--primary{background:var(--green);color:#fff;border:none;box-shadow:0 2px 0 var(--green-d)}
+.modal-btn--primary:hover{background:var(--green-d)}
+.modal-btn--danger{background:var(--red);color:#fff;border:none;box-shadow:0 2px 0 var(--red-d)}
+.modal-btn--danger:hover{background:var(--red-d)}

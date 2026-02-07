@@ -1,0 +1,267 @@
+/* ═══════════════════════════════════════════════════
+   SIDE PANEL — Move History + Battle Controls
+   chess.com style right sidebar
+   ═══════════════════════════════════════════════════ */
+
+.side-panel{
+    background:var(--panel);
+    border-left:1px solid var(--b1);
+    display:flex;flex-direction:column;
+    align-self:center;
+    max-height:calc(100vh - var(--sp-8));
+    border-radius:0 var(--r-lg) var(--r-lg) 0;
+    overflow:hidden;
+}
+
+@media(max-width:860px){
+    .side-panel{border-left:none;border-top:1px solid var(--b1);border-radius:0 0 var(--r-lg) var(--r-lg)}
+}
+
+/* ── Panel header: turn + timer ── */
+.panel-header{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:var(--sp-3) var(--sp-4);
+    border-bottom:1px solid var(--b1);
+}
+
+.turn-indicator{display:flex;align-items:center;gap:var(--sp-2)}
+
+.turn-dot{
+    width:8px;height:8px;border-radius:50%;
+    transition:background var(--dur);
+}
+.turn-dot.you{background:var(--green)}
+.turn-dot.opp{background:var(--red)}
+
+.turn-label{font-size:var(--fs-sm);font-weight:700}
+.turn-label.you{color:var(--green)}
+.turn-label.opp{color:var(--red)}
+
+.penalty-tag{
+    font-size:var(--fs-2xs);font-weight:600;
+    color:var(--amber);background:var(--amber-bg);
+    padding:1px 6px;border-radius:var(--r-sm);
+    border:1px solid rgba(240,192,64,0.15);
+}
+
+.timer-box{
+    display:flex;align-items:center;gap:var(--sp-1);
+    font-family:var(--f-mono);font-size:var(--fs-sm);font-weight:700;
+    color:var(--text-2);padding:var(--sp-1) var(--sp-2);
+    background:var(--surface);border-radius:var(--r-sm);
+}
+.timer-box.warning{color:var(--amber)}
+.timer-box.critical{color:var(--red);animation:pulse 0.8s ease infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+
+/* ═══════ MOVE HISTORY ═══════ */
+.move-history{
+    flex:1;min-height:0;display:flex;flex-direction:column;
+    border-bottom:1px solid var(--b1);
+}
+
+.history-header{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:var(--sp-2) var(--sp-4);
+    font-size:var(--fs-xs);font-weight:700;color:var(--text-3);
+    text-transform:uppercase;letter-spacing:0.06em;
+    border-bottom:1px solid var(--b1);
+    flex-shrink:0;
+}
+.history-count{font-weight:600;font-family:var(--f-mono);text-transform:none;letter-spacing:0}
+
+.history-list{
+    flex:1;overflow-y:auto;padding:var(--sp-2);
+    min-height:100px;
+}
+
+.history-empty{
+    text-align:center;padding:var(--sp-6) var(--sp-4);
+    font-size:var(--fs-xs);color:var(--text-4);
+}
+
+/* Move entry — chess.com style numbered rows */
+.move-entry{
+    display:grid;
+    grid-template-columns:28px 1fr;
+    gap:var(--sp-1);
+    padding:3px var(--sp-2);
+    border-radius:var(--r-sm);
+    font-size:var(--fs-xs);
+    margin-bottom:2px;
+}
+.move-entry:nth-child(odd){background:var(--surface)}
+
+.move-num{
+    font-family:var(--f-mono);font-weight:700;color:var(--text-4);
+    text-align:right;padding-right:var(--sp-2);
+}
+
+.move-text{color:var(--text-2)}
+.move-text.you{color:var(--green)}
+.move-text.opp{color:var(--red)}
+.move-text.sys{color:var(--text-4);font-style:italic}
+
+/* ═══════ BATTLE CONTROLS ═══════ */
+.battle-controls{
+    padding:var(--sp-3) var(--sp-4);
+    flex-shrink:0;
+}
+
+.controls-header{
+    display:flex;justify-content:space-between;align-items:center;
+    margin-bottom:var(--sp-3);
+    font-size:var(--fs-xs);font-weight:700;color:var(--text-3);
+    text-transform:uppercase;letter-spacing:0.06em;
+}
+
+.thinking-badge{
+    display:flex;align-items:center;gap:var(--sp-1);
+    font-size:var(--fs-2xs);color:var(--amber);
+    text-transform:none;letter-spacing:0;font-weight:600;
+}
+.thinking-dot{
+    width:6px;height:6px;border-radius:50%;background:var(--amber);
+    animation:pulse 0.6s ease infinite;
+}
+
+/* ── Mode tabs ── */
+.mode-tabs{display:flex;gap:2px;margin-bottom:var(--sp-3);background:var(--surface);border-radius:var(--r);padding:2px}
+
+.mode-tab{
+    flex:1;display:flex;align-items:center;justify-content:center;gap:var(--sp-1);
+    padding:var(--sp-2);border-radius:6px;font-size:var(--fs-xs);
+    color:var(--text-3);transition:all var(--dur) var(--ease);
+}
+.mode-tab:hover:not(:disabled){color:var(--text-2)}
+.mode-tab.active{background:var(--card);color:var(--text);box-shadow:0 1px 3px rgba(0,0,0,0.3)}
+.mode-tab kbd{margin-left:2px}
+
+/* ── Expression builder ── */
+.expr-builder{
+    background:var(--surface);border-radius:var(--r);
+    padding:var(--sp-3);margin-bottom:var(--sp-3);
+}
+
+.expr-display{
+    background:var(--bg);border:1px solid var(--b1);border-radius:var(--r-sm);
+    padding:var(--sp-2) var(--sp-3);min-height:36px;
+    display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:3px;
+    font-family:var(--f-mono);font-size:var(--fs-lg);font-weight:600;
+    margin-bottom:var(--sp-2);
+}
+.expr-empty{color:var(--text-4);font-size:var(--fs-xs);font-family:var(--f-sans);font-weight:400}
+.expr-val{color:var(--green);background:var(--green-bg);padding:1px 5px;border-radius:3px}
+.expr-op{color:var(--blue);padding:0 2px}
+.expr-paren{color:var(--amber);font-weight:800}
+
+.expr-eval{
+    text-align:center;padding:var(--sp-1) var(--sp-2);font-size:var(--fs-xs);
+    font-weight:700;border-radius:var(--r-sm);margin-bottom:var(--sp-2);
+}
+.expr-eval.valid{color:var(--green);background:var(--green-bg);border:1px solid rgba(129,182,76,0.2)}
+.expr-eval.invalid{color:var(--red);background:var(--red-bg);border:1px solid rgba(224,64,64,0.15)}
+
+.op-row{display:flex;gap:3px;justify-content:center}
+
+.op-btn{
+    width:32px;height:32px;background:var(--card);border:1px solid var(--b1);
+    border-radius:var(--r-sm);color:var(--text);font-size:0.95rem;font-weight:700;
+    display:flex;align-items:center;justify-content:center;
+    transition:all var(--dur) var(--ease);
+}
+.op-btn:hover:not(:disabled){background:var(--surface-h);border-color:var(--b2)}
+.op-btn--paren{color:var(--amber)}
+.op-btn--undo{font-size:0.85rem;color:var(--text-3)}
+
+/* ── Target ── */
+.target-row{
+    display:flex;align-items:center;gap:var(--sp-2);
+    padding:var(--sp-2) var(--sp-3);background:var(--surface);
+    border-radius:var(--r);margin-bottom:var(--sp-3);
+}
+.target-label{font-size:var(--fs-xs);font-weight:600;color:var(--text-3)}
+.target-value{
+    font-family:var(--f-mono);font-size:var(--fs-xl);font-weight:800;color:var(--red);
+    min-width:36px;text-align:center;
+}
+.target-hint{font-size:var(--fs-2xs);color:var(--text-4);margin-left:auto}
+
+/* ── Rule hint ── */
+.rule-hint{
+    font-size:var(--fs-2xs);color:var(--amber);
+    background:var(--amber-bg);border:1px solid rgba(240,192,64,0.15);
+    border-radius:var(--r-sm);padding:var(--sp-1) var(--sp-2);
+    margin-bottom:var(--sp-3);text-align:center;font-weight:600;
+}
+
+/* ── Action buttons ── */
+.action-row{display:flex;gap:var(--sp-2);margin-bottom:var(--sp-2)}
+
+.action-btn{
+    flex:1;display:flex;align-items:center;justify-content:center;gap:var(--sp-1);
+    padding:var(--sp-2) var(--sp-3);border-radius:var(--r);
+    font-size:var(--fs-sm);font-weight:700;
+    transition:all var(--dur) var(--ease);
+}
+.action-btn--clear{background:var(--surface);color:var(--text-3);border:1px solid var(--b1)}
+.action-btn--clear:hover:not(:disabled){background:var(--surface-h);color:var(--text-2)}
+
+.action-btn--attack{
+    background:var(--green);color:#fff;
+    box-shadow:0 2px 0 var(--green-d);
+}
+.action-btn--attack:hover:not(:disabled){background:var(--green-d)}
+.action-btn--attack:active:not(:disabled){transform:translateY(1px);box-shadow:none}
+
+/* ── Secondary action row (skip + undo) ── */
+.action-row-secondary{display:flex;gap:var(--sp-2);margin-top:var(--sp-2)}
+
+.sec-btn{
+    flex:1;padding:var(--sp-1) var(--sp-3);
+    font-size:var(--fs-2xs);color:var(--text-4);font-weight:600;
+    border:1px solid var(--b1);border-radius:var(--r);
+    transition:all var(--dur);display:flex;align-items:center;justify-content:center;gap:var(--sp-1);
+}
+.sec-btn:hover:not(:disabled){color:var(--text-3);border-color:var(--b2)}
+
+/* Valid attack highlight on dice */
+.die.valid-attack{
+    box-shadow:inset 0 0 0 2px rgba(129,182,76,0.4);
+}
+.die.valid-attack::after{
+    content:'✓';position:absolute;bottom:2px;left:4px;
+    font-size:0.6rem;color:var(--green);opacity:0.7;z-index:3;
+}
+
+/* ── Footer ── */
+.panel-footer{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:var(--sp-2) var(--sp-4);
+    border-top:1px solid var(--b1);
+    flex-shrink:0;
+}
+
+.quit-btn{
+    display:flex;align-items:center;gap:var(--sp-1);
+    font-size:var(--fs-xs);color:var(--text-4);
+    transition:color var(--dur);
+}
+.quit-btn:hover{color:var(--red)}
+
+.sound-btn{
+    font-size:1rem;padding:var(--sp-1);border-radius:var(--r-sm);
+    transition:opacity var(--dur);
+}
+.sound-btn:hover{opacity:0.7}
+.sound-btn.muted{opacity:0.3}
+
+/* ── Dice roll number cycling ── */
+@keyframes number-cycle{
+    0%{transform:translateY(0);opacity:1}
+    25%{transform:translateY(-6px);opacity:0.3}
+    50%{transform:translateY(0);opacity:0.6}
+    75%{transform:translateY(4px);opacity:0.3}
+    100%{transform:translateY(0);opacity:1}
+}
+.die.cycling .die-value{animation:number-cycle 0.08s linear infinite}
