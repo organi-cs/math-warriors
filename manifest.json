@@ -1,0 +1,23 @@
+{
+    "name": "Maths Warriors",
+    "short_name": "MathWars",
+    "description": "Strategic 1v1 dice battle game. Capture opponent dice using strength or math-based mind attacks.",
+    "start_url": "/math-warriors/",
+    "display": "standalone",
+    "background_color": "#262421",
+    "theme_color": "#262421",
+    "orientation": "any",
+    "categories": ["games", "education"],
+    "icons": [
+        {
+            "src": "icons/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}

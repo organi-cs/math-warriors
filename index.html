@@ -3,8 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maths Warriors — Strategic Dice Battle</title>
-    <meta name="description" content="A strategic 1v1 dice battle game inspired by SIMOC. Capture opponent dice using strength or mathematical mind attacks.">
+    <title>Maths Warriors — Strategic Dice Battle Game</title>
+    <meta name="description" content="A strategic 1v1 dice battle game. Capture all 6 opponent dice using strength attacks or combine dice with math expressions. Play against AI or a friend.">
+    <meta name="keywords" content="dice game, math game, strategy game, board game, browser game, educational game, multiplication, arithmetic, SIMOC, mind attack">
+    <meta name="author" content="organi-cs">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://organi-cs.github.io/math-warriors/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://organi-cs.github.io/math-warriors/">
+    <meta property="og:title" content="Maths Warriors — Strategic Dice Battle Game">
+    <meta property="og:description" content="Capture opponent dice using strength or math-based mind attacks. Play against AI at 4 difficulty levels or challenge a friend.">
+    <meta property="og:image" content="https://organi-cs.github.io/math-warriors/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="Maths Warriors">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Maths Warriors — Strategic Dice Battle Game">
+    <meta name="twitter:description" content="Capture opponent dice using strength or math-based mind attacks. Play against AI or a friend.">
+    <meta name="twitter:image" content="https://organi-cs.github.io/math-warriors/og-image.png">
+
+    <!-- PWA / Mobile -->
+    <meta name="theme-color" content="#262421">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Maths Warriors">
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+    <link rel="manifest" href="manifest.json">
+
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎲</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,6 +45,32 @@
     <link rel="stylesheet" href="css/panel.css">
     <link rel="stylesheet" href="css/modal.css">
     <link rel="stylesheet" href="css/dither.css">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "VideoGame",
+        "name": "Maths Warriors",
+        "description": "A strategic 1v1 dice battle game. Capture opponent dice using strength attacks or combine dice with math expressions.",
+        "url": "https://organi-cs.github.io/math-warriors/",
+        "genre": ["Strategy", "Educational", "Board Game"],
+        "gamePlatform": "Web Browser",
+        "numberOfPlayers": {
+            "@type": "QuantitativeValue",
+            "minValue": 1,
+            "maxValue": 2
+        },
+        "playMode": ["SinglePlayer", "MultiPlayer"],
+        "applicationCategory": "Game",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
 </head>
 <body>
     <!-- ═══════ HOME SCREEN ═══════ -->

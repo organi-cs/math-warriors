@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://organi-cs.github.io/math-warriors/sitemap.xml
