@@ -147,3 +147,19 @@
 }
 .home-credit a{color:var(--green);text-decoration:none;font-weight:600}
 .home-credit a:hover{text-decoration:underline}
+
+@media(max-width:500px){
+    .home{padding:var(--sp-2)}
+    .home-card{padding:var(--sp-4) var(--sp-3) var(--sp-3)}
+    .home-title{font-size:var(--fs-lg)}
+    .home-tabs{margin-bottom:var(--sp-3)}
+    .home-tab{font-size:var(--fs-2xs);padding:var(--sp-1)}
+    .field{margin-bottom:var(--sp-3)}
+    .field-label{font-size:0.6rem}
+    .diff-grid{grid-template-columns:repeat(2,1fr);gap:var(--sp-1)}
+    .diff-btn{padding:var(--sp-1) var(--sp-2);font-size:var(--fs-2xs)}
+    .opt-btn{padding:var(--sp-2);font-size:var(--fs-2xs)}
+    .play-btn{padding:var(--sp-2) var(--sp-4);font-size:var(--fs-sm)}
+    .howto{max-height:250px}
+    .howto-s p{font-size:var(--fs-xs)}
+}

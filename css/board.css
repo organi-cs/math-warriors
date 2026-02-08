@@ -17,7 +17,22 @@
         grid-template-columns:1fr;
         max-width:500px;
         margin:0 auto;
+        padding:var(--sp-2);
+        padding-bottom:0;
+        gap:0;
+        min-height:auto;
     }
+    .board-column{align-self:start}
+    .die{min-height:56px}
+    .die-value{font-size:clamp(1rem,5vw,1.3rem)}
+    .die-key{font-size:0.55rem;top:2px;right:3px}
+    .die-label{font-size:0.55rem}
+    .player-bar{padding:var(--sp-1) var(--sp-2)}
+    .avatar{width:26px;height:26px;font-size:var(--fs-2xs)}
+    .bar-name{font-size:var(--fs-xs)}
+    .bar-dice{font-size:var(--fs-xs)}
+    .board-half{padding:var(--sp-2)}
+    .board-label{font-size:0.55rem;padding:2px 0}
 }
 
 /* ── Board column ── */
@@ -136,7 +151,6 @@
     font-size:var(--fs-2xs);font-weight:700;color:rgba(255,255,255,0.6);
     letter-spacing:0.04em;margin-top:1px;
 }
-
 
 .die.rolling{animation:die-roll 0.35s var(--ease)}
 @keyframes die-roll{

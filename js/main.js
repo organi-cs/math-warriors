@@ -126,6 +126,11 @@
     // ── Player name live save ──
     document.getElementById('playerNameInput').addEventListener('input', savePlayerName);
 
+    // ── Mobile: toggle move history expand/collapse ──
+    document.querySelector('.history-header').addEventListener('click', () => {
+        document.querySelector('.move-history').classList.toggle('expanded');
+    });
+
 })();
 
 /* ═══════ HELPERS ═══════ */

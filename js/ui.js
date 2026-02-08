@@ -148,10 +148,27 @@ function renderRuleHint() {
 
 function setAttackType(type) {
     if (state.aiThinking) return;
+    if (state.attackType === type) return; // already in this mode
     SFX.click();
-    state.attackType = type;
-    state.selectedDice = [];
-    state.expression = [];
+
+    // When switching Strength → Mind, carry over the selected die
+    if (state.attackType === 'strength' && type === 'mind' && state.selectedDice.length === 1) {
+        const dieId = state.selectedDice[0];
+        const die = myDice().find(d => d.id === dieId && !d.captured);
+        state.attackType = type;
+        if (die) {
+            state.expression = [{ type: 'die', id: die.id, value: die.value }];
+            // selectedDice stays as-is
+        } else {
+            state.selectedDice = [];
+            state.expression = [];
+        }
+    } else {
+        state.attackType = type;
+        state.selectedDice = [];
+        state.expression = [];
+    }
+
     document.getElementById('btnStrength').classList.toggle('active', type === 'strength');
     document.getElementById('btnMind').classList.toggle('active', type === 'mind');
     document.getElementById('exprBuilder').hidden = type !== 'mind';

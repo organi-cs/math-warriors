@@ -84,16 +84,15 @@ document.addEventListener('keydown', e => {
         return;
     }
 
-    // Mind operators
-    if (state.attackType === 'mind') {
-        if (k === '+')         { e.preventDefault(); addOperator('+'); return; }
-        if (k === '-')         { e.preventDefault(); addOperator('-'); return; }
-        if (k === '*')         { e.preventDefault(); addOperator('*'); return; }
-        if (k === '/')         { e.preventDefault(); addOperator('/'); return; }
-        if (k === '(')         { e.preventDefault(); addParen('('); return; }
-        if (k === ')')         { e.preventDefault(); addParen(')'); return; }
-        if (k === 'Backspace') { e.preventDefault(); undoExpression(); return; }
+    // Operators — auto-switch to Mind mode
+    if (['+','-','*','/','(',')'].includes(k)) {
+        e.preventDefault();
+        if (state.attackType !== 'mind') setAttackType('mind');
+        if (k === '(' || k === ')') addParen(k);
+        else addOperator(k);
+        return;
     }
+    if (state.attackType === 'mind' && k === 'Backspace') { e.preventDefault(); undoExpression(); return; }
 
     if (k === 'Enter') { e.preventDefault(); if (!document.getElementById('btnAttack').disabled) executeAttack(); return; }
     if (k === 'Escape') { e.preventDefault(); clearSelection(); return; }
