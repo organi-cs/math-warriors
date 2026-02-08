@@ -5,4 +5,5 @@ const AI_CONFIG={
     hard:{name:'Hard',thinkTime:[1000,2000],optimalChance:0.85,mindAttackChance:0.7,prioritizeHigh:true,maxOperators:3,defensive:true},
     impossible:{name:'Impossible',thinkTime:[600,1000],optimalChance:1.0,mindAttackChance:0.9,prioritizeHigh:true,maxOperators:5,defensive:true}
 };
-const GAME_DURATION=12*60;
+let GAME_DURATION = 12 * 60;  // seconds, 0 = unlimited
+let MOVE_DURATION = 0;         // seconds per move, 0 = no limit

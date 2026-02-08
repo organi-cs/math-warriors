@@ -71,6 +71,7 @@ function executeAttack() {
         state.currentPlayer = state.currentPlayer === 1 ? 2 : 1;
         clearSelection();
         updateUndoBtn();
+        resetMoveTimer();
         if (state.currentPlayer === 2 && settings.mode === 'ai' && !state.gameOver)
             setTimeout(aiTurn, 400);
     });
@@ -130,6 +131,7 @@ function skipTurn() {
     addMove(`${who} skipped`, 'sys');
     state.currentPlayer = state.currentPlayer === 1 ? 2 : 1;
     clearSelection();
+    resetMoveTimer();
     if (state.currentPlayer === 2 && settings.mode === 'ai') setTimeout(aiTurn, 400);
 }
 

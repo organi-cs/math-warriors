@@ -75,6 +75,7 @@
 <body>
     <!-- ═══════ HOME SCREEN ═══════ -->
     <div class="home" id="homeScreen">
+        <canvas class="home-waves" id="homeWaves"></canvas>
         <div class="home-card">
             <div class="home-brand">
                 <svg width="36" height="36" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="7" height="7" rx="1.5" fill="#81b64c"/><rect x="14" y="3" width="7" height="7" rx="1.5" fill="#e8e8e8" opacity="0.3"/><rect x="3" y="14" width="7" height="7" rx="1.5" fill="#e8e8e8" opacity="0.3"/><rect x="14" y="14" width="7" height="7" rx="1.5" fill="#81b64c"/></svg>
@@ -105,6 +106,25 @@
                         <button class="diff-btn" data-diff="medium"><span class="diff-dot" style="background:#f0c040"></span>Medium</button>
                         <button class="diff-btn" data-diff="hard"><span class="diff-dot" style="background:#e87040"></span>Hard</button>
                         <button class="diff-btn" data-diff="impossible"><span class="diff-dot" style="background:#e04040"></span>Impossible</button>
+                    </div></div>
+                <!-- Timer settings -->
+                <div class="field"><label class="field-label">Game Timer</label>
+                    <div class="timer-setting">
+                        <input class="field-input field-input--sm" id="gameTimerInput" type="number" min="1" max="60" value="12" step="1">
+                        <span class="timer-unit">minutes</span>
+                        <button class="timer-preset" data-minutes="5">5m</button>
+                        <button class="timer-preset active" data-minutes="12">12m</button>
+                        <button class="timer-preset" data-minutes="30">30m</button>
+                        <button class="timer-preset" data-minutes="0">∞</button>
+                    </div></div>
+                <div class="field"><label class="field-label">Move Timer <span class="field-hint">(0 = no limit)</span></label>
+                    <div class="timer-setting">
+                        <input class="field-input field-input--sm" id="moveTimerInput" type="number" min="0" max="120" value="0" step="5">
+                        <span class="timer-unit">seconds</span>
+                        <button class="move-preset" data-seconds="0">Off</button>
+                        <button class="move-preset" data-seconds="10">10s</button>
+                        <button class="move-preset" data-seconds="15">15s</button>
+                        <button class="move-preset" data-seconds="30">30s</button>
                     </div></div>
                 <div class="field"><label class="field-label">Sound</label>
                     <button class="sound-toggle" id="soundToggle"><span id="soundIcon">🔊</span> <span id="soundLabel">On</span></button></div>
@@ -164,7 +184,10 @@
         <div class="side-panel">
             <div class="panel-header">
                 <div class="turn-indicator"><span class="turn-dot" id="turnDot"></span><span class="turn-label" id="turnLabel">Your Turn</span><span class="penalty-tag" id="penaltyTag" hidden>1st move penalty</span></div>
-                <div class="timer-box" id="timerBox"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span id="timerText">12:00</span></div>
+                <div class="timer-group">
+                    <div class="timer-box" id="timerBox"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span id="timerText">12:00</span></div>
+                    <div class="timer-box move-timer-box" id="moveTimerBox" hidden><span id="moveTimerText">15</span><span class="move-timer-label">s</span></div>
+                </div>
             </div>
             <div class="move-history"><div class="history-header"><span>Move History</span><span class="history-count" id="historyCount">0 moves</span></div><div class="history-list" id="historyList"><div class="history-empty">Game will begin shortly…</div></div></div>
             <div class="battle-controls">
@@ -220,6 +243,7 @@
     </div>
 
     <script src="js/dither.js"></script>
+    <script src="js/waves.js"></script>
     <script src="js/sound.js"></script>
     <script src="js/stats.js"></script>
     <script src="js/config.js"></script>

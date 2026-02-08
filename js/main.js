@@ -4,6 +4,9 @@
 
 (function boot() {
 
+    // ── Start background waves ──
+    Waves.start();
+
     // ── Load saved player name ──
     const savedName = Stats.getPlayerName();
     if (savedName) document.getElementById('playerNameInput').value = savedName;
@@ -61,6 +64,34 @@
         });
     });
 
+    // ── Game timer presets ──
+    document.querySelectorAll('.timer-preset').forEach(btn => {
+        btn.addEventListener('click', () => {
+            SFX.click();
+            const mins = parseInt(btn.dataset.minutes);
+            document.getElementById('gameTimerInput').value = mins || '';
+            document.querySelectorAll('.timer-preset').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        });
+    });
+    document.getElementById('gameTimerInput').addEventListener('input', () => {
+        document.querySelectorAll('.timer-preset').forEach(b => b.classList.remove('active'));
+    });
+
+    // ── Move timer presets ──
+    document.querySelectorAll('.move-preset').forEach(btn => {
+        btn.addEventListener('click', () => {
+            SFX.click();
+            const secs = parseInt(btn.dataset.seconds);
+            document.getElementById('moveTimerInput').value = secs;
+            document.querySelectorAll('.move-preset').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        });
+    });
+    document.getElementById('moveTimerInput').addEventListener('input', () => {
+        document.querySelectorAll('.move-preset').forEach(b => b.classList.remove('active'));
+    });
+
     // ── Sound toggle (home screen) ──
     document.getElementById('soundToggle').addEventListener('click', toggleSound);
 
@@ -76,8 +107,9 @@
         if (saved) {
             settings.mode = saved.mode || 'ai';
             settings.difficulty = saved.difficulty || 'easy';
+            if (saved.gameMins !== undefined) document.getElementById('gameTimerInput').value = saved.gameMins;
+            if (saved.moveSecs !== undefined) document.getElementById('moveTimerInput').value = saved.moveSecs;
         }
-        // Also grab current name
         savePlayerName();
         startGame();
     });
@@ -148,13 +180,19 @@ function savePlayerName() {
 function startGame() {
     savePlayerName();
 
+    // Read timer settings
+    const gameMins = parseInt(document.getElementById('gameTimerInput').value) || 0;
+    GAME_DURATION = gameMins > 0 ? gameMins * 60 : 0;
+    MOVE_DURATION = parseInt(document.getElementById('moveTimerInput').value) || 0;
+
     // Save settings for Quick Play
-    Stats.saveSettings({ mode: settings.mode, difficulty: settings.difficulty });
+    Stats.saveSettings({ mode: settings.mode, difficulty: settings.difficulty, gameMins, moveSecs: MOVE_DURATION });
     document.getElementById('btnQuickPlay').hidden = false;
 
     // Hide home, show game
     document.getElementById('homeScreen').classList.add('hidden');
     document.getElementById('gameLayout').hidden = false;
+    Waves.stop();
 
     // Configure opponent display
     if (settings.mode === 'ai') {
@@ -190,6 +228,7 @@ function showMenu() {
     document.getElementById('homeScreen').classList.remove('hidden');
     document.getElementById('victoryModal').classList.remove('active');
     document.getElementById('confirmQuit').classList.remove('active');
+    Waves.start();
     renderStats();
 }
 

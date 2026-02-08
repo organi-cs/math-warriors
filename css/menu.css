@@ -9,9 +9,16 @@
 }
 .home.hidden{display:none}
 
+.home-waves{
+    position:absolute;inset:0;width:100%;height:100%;
+    pointer-events:none;z-index:0;
+    opacity:0.35;
+}
+
 .home-card{
     background:var(--panel);border:1px solid var(--b2);border-radius:var(--r-lg);
     padding:var(--sp-6) var(--sp-6) var(--sp-4);max-width:480px;width:100%;box-shadow:var(--sh-lg);
+    position:relative;z-index:1;
 }
 
 /* Brand */
@@ -138,6 +145,24 @@
     display:grid;grid-template-columns:auto 1fr;gap:var(--sp-1) var(--sp-3);
     font-size:var(--fs-xs);color:var(--text-3);margin-top:var(--sp-2);
 }
+
+/* Timer settings */
+.timer-setting{
+    display:flex;align-items:center;gap:var(--sp-2);flex-wrap:wrap;
+}
+.field-input--sm{
+    width:64px;text-align:center;padding:var(--sp-1) var(--sp-2);
+    font-family:var(--f-mono);font-size:var(--fs-sm);
+}
+.timer-unit{font-size:var(--fs-xs);color:var(--text-3);min-width:52px}
+.timer-preset,.move-preset{
+    padding:var(--sp-1) var(--sp-2);font-size:var(--fs-2xs);font-weight:600;
+    background:var(--surface);border:1px solid var(--b1);border-radius:var(--r-sm);
+    color:var(--text-3);transition:all var(--dur);
+}
+.timer-preset:hover,.move-preset:hover{background:var(--surface-h);color:var(--text-2)}
+.timer-preset.active,.move-preset.active{border-color:var(--green);color:var(--text);background:var(--green-bg)}
+.field-hint{font-weight:400;color:var(--text-4);text-transform:none;letter-spacing:0}
 
 /* Credit */
 .home-credit{
