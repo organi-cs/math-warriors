@@ -72,14 +72,34 @@
     --f-sans: 'Inter', -apple-system, sans-serif;
     --f-mono: 'JetBrains Mono', monospace;
 
-    --fs-xl:  1.35rem;
-    --fs-lg:  1rem;
-    --fs-md:  0.875rem;
-    --fs-sm:  0.8rem;
-    --fs-xs:  0.72rem;
-    --fs-2xs: 0.65rem;
+    --fs-xl:  1.5rem;
+    --fs-lg:  1.1rem;
+    --fs-md:  0.95rem;
+    --fs-sm:  0.85rem;
+    --fs-xs:  0.78rem;
+    --fs-2xs: 0.68rem;
 
     /* ── Motion ── */
     --ease: cubic-bezier(0.22,0.61,0.36,1);
     --dur: 0.15s;
+}
+
+/* ── Light theme ── */
+:root.light {
+    --bg:       #f0f0f0;
+    --bg-board: #e8e6e3;
+    --panel:    #ffffff;
+    --card:     #f5f5f5;
+    --surface:  #e8e8e8;
+    --surface-h: #dcdcdc;
+    --surface-a: #d0d0d0;
+    --text:      #1a1a1a;
+    --text-2:    #4a4a4a;
+    --text-3:    #7a7a7a;
+    --text-4:    #aaaaaa;
+    --b1: rgba(0,0,0,0.08);
+    --b2: rgba(0,0,0,0.12);
+    --b3: rgba(0,0,0,0.18);
+    --sh: 0 2px 8px rgba(0,0,0,0.1);
+    --sh-lg: 0 8px 24px rgba(0,0,0,0.15);
 }

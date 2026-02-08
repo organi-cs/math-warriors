@@ -66,7 +66,7 @@ document.addEventListener('keydown', e => {
 
     if (k === 's' || k === 'S') { e.preventDefault(); setAttackType('strength'); return; }
     if (k === 'm' || k === 'M') { e.preventDefault(); setAttackType('mind'); return; }
-    if (k === 'u' || k === 'U') { e.preventDefault(); performUndo(); return; }
+    // Undo removed
 
     // Number input
     if (k >= '0' && k <= '9') {

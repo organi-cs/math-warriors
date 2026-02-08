@@ -282,49 +282,50 @@
         position:sticky;bottom:0;left:0;right:0;
         z-index:50;
         box-shadow:0 -4px 16px rgba(0,0,0,0.4);
+        overflow:visible;
     }
-    .panel-header{padding:var(--sp-1) var(--sp-3)}
-    .turn-label{font-size:var(--fs-2xs)}
-    .penalty-tag{font-size:0.55rem;padding:0 4px}
-    .timer-box{font-size:var(--fs-2xs);padding:2px var(--sp-1)}
+    .panel-header{padding:var(--sp-2) var(--sp-3)}
+    .turn-label{font-size:var(--fs-sm)}
+    .penalty-tag{font-size:var(--fs-2xs);padding:2px 6px}
+    .timer-box{font-size:var(--fs-xs);padding:var(--sp-1) var(--sp-2)}
 
     /* Hide move history on mobile */
     .move-history{display:none !important}
 
-    /* Compact battle controls */
+    /* Battle controls */
     .battle-controls{padding:var(--sp-2) var(--sp-3)}
     .controls-header{display:none}
 
-    /* Mode tabs */
-    .mode-tabs{margin-bottom:var(--sp-1)}
-    .mode-tab{padding:var(--sp-1);font-size:var(--fs-2xs)}
+    /* Mode tabs — big touch targets */
+    .mode-tabs{margin-bottom:var(--sp-2)}
+    .mode-tab{padding:var(--sp-2) var(--sp-3);font-size:var(--fs-sm);min-height:40px}
     .mode-tab svg{display:none}
     .mode-tab kbd{display:none}
 
-    /* Expression builder compact */
-    .expr-builder{padding:var(--sp-1);margin-bottom:var(--sp-1)}
-    .expr-display{min-height:24px;padding:var(--sp-1);font-size:var(--fs-sm)}
-    .expr-eval{padding:2px var(--sp-1);font-size:0.6rem;margin-bottom:var(--sp-1)}
-    .op-row{gap:2px}
-    .op-btn{width:32px;height:28px;font-size:0.85rem}
+    /* Expression builder */
+    .expr-builder{padding:var(--sp-2);margin-bottom:var(--sp-2)}
+    .expr-display{min-height:32px;padding:var(--sp-1) var(--sp-2);font-size:var(--fs-md)}
+    .expr-eval{padding:var(--sp-1);font-size:var(--fs-xs);margin-bottom:var(--sp-1)}
+    .op-row{gap:4px}
+    .op-btn{width:40px;height:36px;font-size:1rem}
 
-    /* Target row compact */
-    .target-row{padding:var(--sp-1) var(--sp-2);margin-bottom:var(--sp-1)}
-    .target-label{font-size:0.6rem}
-    .target-value{font-size:var(--fs-md)}
-    .target-hint{font-size:0.55rem}
+    /* Target row */
+    .target-row{padding:var(--sp-2);margin-bottom:var(--sp-2)}
+    .target-label{font-size:var(--fs-xs)}
+    .target-value{font-size:var(--fs-lg)}
+    .target-hint{font-size:var(--fs-2xs)}
 
-    .rule-hint{margin-bottom:var(--sp-1);font-size:0.55rem;padding:2px var(--sp-1)}
+    .rule-hint{margin-bottom:var(--sp-2);font-size:var(--fs-2xs);padding:var(--sp-1) var(--sp-2)}
 
-    /* Action buttons */
-    .action-row{margin-bottom:0;gap:var(--sp-1)}
-    .action-btn{padding:var(--sp-1) var(--sp-2);font-size:var(--fs-xs)}
+    /* Action buttons — big touch targets */
+    .action-row{margin-bottom:0;gap:var(--sp-2)}
+    .action-btn{padding:var(--sp-3) var(--sp-3);font-size:var(--fs-sm);min-height:44px;border-radius:var(--r)}
     .action-btn kbd{display:none}
-    .action-row-secondary{margin-top:var(--sp-1);gap:var(--sp-1)}
-    .sec-btn{padding:2px var(--sp-2);font-size:0.55rem}
+    .action-row-secondary{margin-top:var(--sp-2);gap:var(--sp-2)}
+    .sec-btn{padding:var(--sp-2) var(--sp-3);font-size:var(--fs-xs);min-height:36px}
     .sec-btn kbd{display:none}
 
     /* Footer */
-    .panel-footer{padding:var(--sp-1) var(--sp-3)}
-    .quit-btn{font-size:var(--fs-2xs)}
+    .panel-footer{padding:var(--sp-2) var(--sp-3)}
+    .quit-btn{font-size:var(--fs-xs)}
 }

@@ -7,6 +7,8 @@ function initRender() {
     _diceEls = {};
     buildDiceRow('youDiceRow', state.youDice, 1);
     buildDiceRow('oppDiceRow', state.opponentDice, 2);
+    document.getElementById('youAttackRow').innerHTML = '';
+    document.getElementById('oppAttackRow').innerHTML = '';
 }
 
 function buildDiceRow(containerId, dice, player) {
@@ -20,7 +22,7 @@ function buildDiceRow(containerId, dice, player) {
         el.setAttribute('tabindex', die.captured ? '-1' : '0');
         el.setAttribute('role', 'button');
         el.setAttribute('aria-label', `D${die.sides}: ${die.captured ? 'captured' : die.value}`);
-        el.innerHTML = `<span class="die-key">${die.captured ? '' : die.value}</span><span class="die-value">${die.captured ? '—' : die.value}</span><span class="die-label">D${die.sides}</span>`;
+        el.innerHTML = `<span class="die-value">${die.captured ? '—' : die.value}</span><span class="die-label">D${die.sides}</span>`;
         // Bind click handler immediately
         if (!die.captured) {
             const click = () => { SFX.select(); handleDieClick(die, player); };
@@ -36,6 +38,7 @@ function buildDiceRow(containerId, dice, player) {
 function render() {
     patchDice(state.youDice, 1);
     patchDice(state.opponentDice, 2);
+    renderAttackZones();
     renderTurn();
     renderCounts();
     renderControls();
@@ -67,33 +70,81 @@ function patchDice(dice, player) {
         const el = _diceEls[die.id];
         if (!el) return;
 
-        // Update classes (toggle, not rebuild)
+        const isSelected = !die.captured && isMe && state.selectedDice.includes(die.id);
+
         el.classList.toggle('captured', die.captured);
-        el.classList.toggle('selected', !die.captured && isMe && state.selectedDice.includes(die.id));
+        el.classList.toggle('selected', isSelected);
+        el.classList.toggle('in-attack', isSelected); // dim in home row when in attack zone
         el.classList.toggle('target', !die.captured && isTgt && state.targetDie === die.id);
         el.classList.toggle('valid-attack',
             !die.captured && isMe && validIds.has(die.id) && !state.selectedDice.includes(die.id));
 
-        // Update text
         const valEl = el.querySelector('.die-value');
-        const keyEl = el.querySelector('.die-key');
         valEl.textContent = die.captured ? '—' : die.value;
-        keyEl.textContent = die.captured ? '' : die.value;
 
-        // Tabindex + aria
         el.setAttribute('tabindex', die.captured ? '-1' : '0');
         el.setAttribute('aria-label', `D${die.sides}: ${die.captured ? 'captured' : die.value}`);
 
-        // Click handler (re-bind since die value changes)
-        if (!die.captured && !state.aiThinking) {
+        if (!die.captured && !state.aiThinking && !isSelected) {
             const click = () => { SFX.select(); handleDieClick(die, player); };
             el.onclick = click;
             el.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); click(); } };
+        } else if (isSelected && isMe) {
+            // Clicking selected die deselects it
+            const click = () => { SFX.select(); handleDieClick(die, player); };
+            el.onclick = click;
+            el.onkeydown = null;
         } else {
             el.onclick = null;
             el.onkeydown = null;
         }
     });
+}
+
+/** Render attack zones — always 6 slots, filled or empty */
+function renderAttackZones() {
+    const youRow = document.getElementById('youAttackRow');
+    const oppRow = document.getElementById('oppAttackRow');
+
+    const myAttackRow = state.currentPlayer === 1 ? youRow : oppRow;
+    const tgtAttackRow = state.currentPlayer === 1 ? oppRow : youRow;
+
+    // My attack zone — 6 slots, selected dice fill from left
+    myAttackRow.innerHTML = '';
+    for (let i = 0; i < 6; i++) {
+        const selId = state.selectedDice[i];
+        const die = selId ? myDice().find(d => d.id === selId) : null;
+        if (die) {
+            const el = document.createElement('div');
+            el.className = `attack-die ${die.name} you-die`;
+            el.innerHTML = `<span class="die-value">${die.value}</span><span class="die-label">D${die.sides}</span>`;
+            el.style.cursor = 'pointer';
+            el.onclick = () => { SFX.select(); handleDieClick(die, state.currentPlayer); };
+            myAttackRow.appendChild(el);
+        } else {
+            const slot = document.createElement('div');
+            slot.className = 'attack-slot';
+            myAttackRow.appendChild(slot);
+        }
+    }
+
+    // Target attack zone — 6 slots, target die in first slot
+    tgtAttackRow.innerHTML = '';
+    for (let i = 0; i < 6; i++) {
+        if (i === 0 && state.targetDie) {
+            const die = oppDice().find(d => d.id === state.targetDie && !d.captured);
+            if (die) {
+                const el = document.createElement('div');
+                el.className = `attack-die ${die.name} opp-die`;
+                el.innerHTML = `<span class="die-value">${die.value}</span><span class="die-label">D${die.sides}</span>`;
+                tgtAttackRow.appendChild(el);
+                continue;
+            }
+        }
+        const slot = document.createElement('div');
+        slot.className = 'attack-slot';
+        tgtAttackRow.appendChild(slot);
+    }
 }
 
 function renderTurn() {

@@ -27,6 +27,11 @@
             document.querySelectorAll('.diff-btn').forEach(b =>
                 b.classList.toggle('selected', b.dataset.diff === settings.difficulty));
         }
+        if (savedSettings.diceSort) {
+            settings.diceSort = savedSettings.diceSort;
+            document.getElementById('sortValue').classList.toggle('selected', settings.diceSort === 'value');
+            document.getElementById('sortType').classList.toggle('selected', settings.diceSort === 'type');
+        }
     }
 
     // ── Home tab navigation ──
@@ -64,6 +69,61 @@
         });
     });
 
+    // ── Dice sort ──
+    document.querySelectorAll('[data-action="sort"]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            SFX.click();
+            settings.diceSort = btn.dataset.value;
+            document.getElementById('sortValue').classList.toggle('selected', settings.diceSort === 'value');
+            document.getElementById('sortType').classList.toggle('selected', settings.diceSort === 'type');
+        });
+    });
+
+    // ── Always go first ──
+    document.querySelectorAll('[data-action="first"]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            SFX.click();
+            settings.alwaysFirst = btn.dataset.value === 'true';
+            document.getElementById('firstOff').classList.toggle('selected', !settings.alwaysFirst);
+            document.getElementById('firstOn').classList.toggle('selected', settings.alwaysFirst);
+        });
+    });
+    // Default state
+    document.getElementById('firstOff').classList.add('selected');
+
+    // ── Theme ──
+    document.querySelectorAll('[data-action="theme"]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            SFX.click();
+            settings.theme = btn.dataset.value;
+            document.getElementById('themeDark').classList.toggle('selected', settings.theme === 'dark');
+            document.getElementById('themeLight').classList.toggle('selected', settings.theme === 'light');
+            document.documentElement.classList.toggle('light', settings.theme === 'light');
+        });
+    });
+
+    // ── Luck slider ──
+    document.getElementById('luckSlider').addEventListener('input', (e) => {
+        const v = parseInt(e.target.value);
+        settings.luck = v;
+        const labels = { '-3':'Very Unlucky', '-2':'Unlucky', '-1':'Slightly Unlucky', '0':'Neutral', '1':'Slightly Lucky', '2':'Lucky', '3':'Very Lucky' };
+        document.getElementById('luckValue').textContent = labels[v] || 'Neutral';
+    });
+
+    // ── Settings modal ──
+    document.getElementById('btnOpenSettings').addEventListener('click', () => {
+        SFX.click();
+        document.getElementById('settingsOverlay').classList.add('active');
+    });
+    document.getElementById('btnCloseSettings').addEventListener('click', () => {
+        SFX.click();
+        document.getElementById('settingsOverlay').classList.remove('active');
+    });
+    document.getElementById('settingsOverlay').addEventListener('click', (e) => {
+        if (e.target === e.currentTarget) document.getElementById('settingsOverlay').classList.remove('active');
+    });
+    document.getElementById('soundToggle').addEventListener('click', toggleSound);
+
     // ── Game timer presets ──
     document.querySelectorAll('.timer-preset').forEach(btn => {
         btn.addEventListener('click', () => {
@@ -92,9 +152,6 @@
         document.querySelectorAll('.move-preset').forEach(b => b.classList.remove('active'));
     });
 
-    // ── Sound toggle (home screen) ──
-    document.getElementById('soundToggle').addEventListener('click', toggleSound);
-
     // ── Sound toggle (in-game) ──
     document.getElementById('gameSoundToggle').addEventListener('click', toggleSound);
 
@@ -107,6 +164,7 @@
         if (saved) {
             settings.mode = saved.mode || 'ai';
             settings.difficulty = saved.difficulty || 'easy';
+            settings.diceSort = saved.diceSort || 'value';
             if (saved.gameMins !== undefined) document.getElementById('gameTimerInput').value = saved.gameMins;
             if (saved.moveSecs !== undefined) document.getElementById('moveTimerInput').value = saved.moveSecs;
         }
@@ -137,7 +195,7 @@
     document.getElementById('btnClear').addEventListener('click', () => { SFX.click(); clearSelection(); });
     document.getElementById('btnAttack').addEventListener('click', executeAttack);
     document.getElementById('btnSkip').addEventListener('click', skipTurn);
-    document.getElementById('btnUndo').addEventListener('click', performUndo);
+    // (undo button removed)
 
     // ── Victory modal ──
     document.getElementById('btnModalMenu').addEventListener('click', showMenu);
@@ -186,7 +244,7 @@ function startGame() {
     MOVE_DURATION = parseInt(document.getElementById('moveTimerInput').value) || 0;
 
     // Save settings for Quick Play
-    Stats.saveSettings({ mode: settings.mode, difficulty: settings.difficulty, gameMins, moveSecs: MOVE_DURATION });
+    Stats.saveSettings({ mode: settings.mode, difficulty: settings.difficulty, diceSort: settings.diceSort, gameMins, moveSecs: MOVE_DURATION });
     document.getElementById('btnQuickPlay').hidden = false;
 
     // Hide home, show game
