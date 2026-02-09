@@ -10,44 +10,52 @@
 
 :root {
     /* ── Surfaces ── */
-    --bg:       #262421;     /* page background — chess.com brown-black */
-    --bg-board: #312e2b;     /* board background */
-    --panel:    #1d1b19;     /* side panel */
-    --card:     #262421;
-    --surface:  #302d2a;
-    --surface-h: #3a3734;    /* hover */
-    --surface-a: #44413d;    /* active/pressed */
+    --bg: #202020;
+    /* Darker, flatter background */
+    --bg-board: #2a2a2a;
+    /* Board background */
+    --panel: #181818;
+    /* Side panel */
+    --card: #2a2a2a;
+    --surface: #333333;
+    --surface-h: #404040;
+    /* hover */
+    --surface-a: #484848;
+    /* active/pressed */
 
     /* ── Board squares ── */
-    --sq-light: #eeeed2;     /* light square */
-    --sq-dark:  #769656;     /* dark square — chess.com green */
+    --sq-light: #e0e0e0;
+    /* light square */
+    --sq-dark: #4a4a4a;
+    /* dark square - flat grey */
 
     /* ── Text ── */
-    --text:      #f0f0f0;
-    --text-2:    #bababa;
-    --text-3:    #8b8987;
-    --text-4:    #5c5955;
+    --text: #f0f0f0;
+    --text-2: #bababa;
+    --text-3: #8b8987;
+    --text-4: #5c5955;
 
     /* ── Accents ── */
-    --green:     #81b64c;    /* chess.com green — primary CTA */
-    --green-d:   #629b34;
-    --green-bg:  rgba(129,182,76,0.12);
+    --green: #81b64c;
+    /* chess.com green — primary CTA */
+    --green-d: #629b34;
+    --green-bg: rgba(129, 182, 76, 0.12);
 
-    --red:       #e04040;
-    --red-d:     #b83030;
-    --red-bg:    rgba(224,64,64,0.1);
+    --red: #e04040;
+    --red-d: #b83030;
+    --red-bg: rgba(224, 64, 64, 0.1);
 
-    --amber:     #f0c040;
-    --amber-d:   #c89e2e;
-    --amber-bg:  rgba(240,192,64,0.1);
+    --amber: #f0c040;
+    --amber-d: #c89e2e;
+    --amber-bg: rgba(240, 192, 64, 0.1);
 
-    --blue:      #5c9ae0;
-    --blue-bg:   rgba(92,154,224,0.1);
+    --blue: #5c9ae0;
+    --blue-bg: rgba(92, 154, 224, 0.1);
 
     /* ── Borders ── */
-    --b1: rgba(255,255,255,0.06);
-    --b2: rgba(255,255,255,0.1);
-    --b3: rgba(255,255,255,0.15);
+    --b1: rgba(255, 255, 255, 0.06);
+    --b2: rgba(255, 255, 255, 0.1);
+    --b3: rgba(255, 255, 255, 0.15);
 
     /* ── Spacing (8px) ── */
     --sp-1: 4px;
@@ -60,46 +68,46 @@
     --sp-10: 40px;
 
     /* ── Radius ── */
-    --r:    8px;
+    --r: 8px;
     --r-lg: 12px;
     --r-sm: 4px;
 
     /* ── Shadows ── */
-    --sh: 0 2px 8px rgba(0,0,0,0.3);
-    --sh-lg: 0 8px 24px rgba(0,0,0,0.4);
+    --sh: 0 2px 8px rgba(0, 0, 0, 0.3);
+    --sh-lg: 0 8px 24px rgba(0, 0, 0, 0.4);
 
     /* ── Typography ── */
     --f-sans: 'Inter', -apple-system, sans-serif;
     --f-mono: 'JetBrains Mono', monospace;
 
-    --fs-xl:  1.5rem;
-    --fs-lg:  1.1rem;
-    --fs-md:  0.95rem;
-    --fs-sm:  0.85rem;
-    --fs-xs:  0.78rem;
+    --fs-xl: 1.5rem;
+    --fs-lg: 1.1rem;
+    --fs-md: 0.95rem;
+    --fs-sm: 0.85rem;
+    --fs-xs: 0.78rem;
     --fs-2xs: 0.68rem;
 
     /* ── Motion ── */
-    --ease: cubic-bezier(0.22,0.61,0.36,1);
+    --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
     --dur: 0.15s;
 }
 
 /* ── Light theme ── */
 :root.light {
-    --bg:       #f0f0f0;
+    --bg: #f0f0f0;
     --bg-board: #e8e6e3;
-    --panel:    #ffffff;
-    --card:     #f5f5f5;
-    --surface:  #e8e8e8;
+    --panel: #ffffff;
+    --card: #f5f5f5;
+    --surface: #e8e8e8;
     --surface-h: #dcdcdc;
     --surface-a: #d0d0d0;
-    --text:      #1a1a1a;
-    --text-2:    #4a4a4a;
-    --text-3:    #7a7a7a;
-    --text-4:    #aaaaaa;
-    --b1: rgba(0,0,0,0.08);
-    --b2: rgba(0,0,0,0.12);
-    --b3: rgba(0,0,0,0.18);
-    --sh: 0 2px 8px rgba(0,0,0,0.1);
-    --sh-lg: 0 8px 24px rgba(0,0,0,0.15);
+    --text: #1a1a1a;
+    --text-2: #4a4a4a;
+    --text-3: #7a7a7a;
+    --text-4: #aaaaaa;
+    --b1: rgba(0, 0, 0, 0.08);
+    --b2: rgba(0, 0, 0, 0.12);
+    --b3: rgba(0, 0, 0, 0.18);
+    --sh: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --sh-lg: 0 8px 24px rgba(0, 0, 0, 0.15);
 }

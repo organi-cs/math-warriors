@@ -98,15 +98,16 @@ function animateDiceRoll(selectedDice, callback) {
             const el = document.querySelector(`[data-id="${d.id}"]`);
             if (el) {
                 const valEl = el.querySelector('.die-value');
-                if (valEl) valEl.textContent = rollDie(d.sides);
+                if (valEl) valEl.textContent = rollDie(d.sides, state.currentPlayer);
             }
         });
 
         if (elapsed >= CYCLE_DURATION) {
             clearInterval(interval);
             // Land on final values
+            const player = state.currentPlayer; // Dice being rolled belong to current player
             selectedDice.forEach(d => {
-                d.value = rollDie(d.sides);
+                d.value = rollDie(d.sides, player);
                 const el = document.querySelector(`[data-id="${d.id}"]`);
                 if (el) {
                     el.classList.remove('cycling');

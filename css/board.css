@@ -3,135 +3,443 @@
    Opp Home | Opp Attack | ⚔ | Your Attack | Your Home
    ═══════════════════════════════════════════════════ */
 
-.game-layout{
-    display:grid;grid-template-columns:auto 420px;
-    justify-content:center;gap:0;min-height:100vh;padding:var(--sp-4);
+.game-layout {
+    display: grid;
+    grid-template-columns: auto 420px;
+    justify-content: center;
+    gap: 0;
+    min-height: 100dvh;
+    /* Optimize for mobile viewports */
+    padding: var(--sp-4);
+    align-content: center;
+    /* Center vertically if space allows */
 }
 
-.board-column{display:flex;flex-direction:column;gap:0;align-self:center}
+.board-column {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    align-self: center
+}
 
 /* ── Player bars ── */
-.player-bar{display:flex;justify-content:space-between;align-items:center;padding:var(--sp-2) var(--sp-3);background:var(--panel)}
-.player-bar--opp{border-radius:var(--r) var(--r) 0 0}
-.player-bar--you{border-radius:0 0 var(--r) var(--r)}
-.bar-left{display:flex;align-items:center;gap:var(--sp-2)}
-.avatar{width:32px;height:32px;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:var(--fs-sm)}
-.avatar--you{background:var(--green);color:#fff}
-.avatar--opp{background:var(--red);color:#fff}
-.bar-info{display:flex;align-items:center;gap:var(--sp-2)}
-.bar-name{font-size:var(--fs-sm);font-weight:700}
-.bar-badge{font-size:var(--fs-2xs);font-weight:600;color:var(--text-3);background:var(--surface);padding:1px 6px;border-radius:var(--r-sm)}
-.first-tag{font-size:var(--fs-2xs);font-weight:700;color:var(--amber);background:var(--amber-bg);padding:1px 6px;border-radius:var(--r-sm);border:1px solid rgba(240,192,64,0.2)}
-.bar-dice{font-family:var(--f-mono);font-size:var(--fs-sm);color:var(--text-3);font-weight:600}
+.player-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--sp-2) var(--sp-3);
+    background: var(--panel)
+}
+
+.player-bar--opp {
+    border-radius: var(--r) var(--r) 0 0
+}
+
+.player-bar--you {
+    border-radius: 0 0 var(--r) var(--r)
+}
+
+.bar-left {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2)
+}
+
+.avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: var(--r-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: var(--fs-sm)
+}
+
+.avatar--you {
+    background: var(--green);
+    color: #fff
+}
+
+.avatar--opp {
+    background: var(--red);
+    color: #fff
+}
+
+.bar-info {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2)
+}
+
+.bar-name {
+    font-size: var(--fs-sm);
+    font-weight: 700
+}
+
+.bar-badge {
+    font-size: var(--fs-2xs);
+    font-weight: 600;
+    color: var(--text-3);
+    background: var(--surface);
+    padding: 1px 6px;
+    border-radius: var(--r-sm)
+}
+
+.first-tag {
+    font-size: var(--fs-2xs);
+    font-weight: 700;
+    color: var(--amber);
+    background: var(--amber-bg);
+    padding: 1px 6px;
+    border-radius: var(--r-sm);
+    border: 1px solid rgba(240, 192, 64, 0.2)
+}
+
+.bar-dice {
+    font-family: var(--f-mono);
+    font-size: var(--fs-sm);
+    color: var(--text-3);
+    font-weight: 600
+}
 
 /* ── Board ── */
-.board{background:var(--bg-board);user-select:none}
+.board {
+    background: var(--bg-board);
+    user-select: none
+}
 
 /* ── Board zones ── */
-.board-zone{padding:var(--sp-3) var(--sp-4);position:relative;overflow:hidden}
-.board-label{font-size:var(--fs-2xs);font-weight:700;color:var(--text-4);text-transform:uppercase;letter-spacing:0.08em;padding:var(--sp-1) 0}
-.board-zone--opp-home .board-label{text-align:right}
+.board-zone {
+    padding: var(--sp-3) var(--sp-4);
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s var(--ease);
+}
+
+/* Active Player Glow */
+.board-zone--you-home.active {
+    background: linear-gradient(to bottom, rgba(129, 182, 76, 0.05), transparent);
+    box-shadow: inset 0 4px 12px rgba(129, 182, 76, 0.1);
+}
+
+.board-zone--opp-home.active {
+    background: linear-gradient(to top, rgba(224, 64, 64, 0.05), transparent);
+    box-shadow: inset 0 -4px 12px rgba(224, 64, 64, 0.1);
+}
+
+.board-label {
+    font-size: var(--fs-2xs);
+    font-weight: 700;
+    color: var(--text-4);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: var(--sp-1) 0
+}
+
+.board-zone--opp-home .board-label {
+    text-align: right
+}
 
 /* Attack zones — darker inset */
 /* Attack zones — same padding as home zones */
+/* Attack zones — darker inset */
 .board-zone--opp-attack,
-.board-zone--you-attack{
-    padding:var(--sp-3) var(--sp-4);
-    background:rgba(0,0,0,0.15);
+.board-zone--you-attack {
+    padding: var(--sp-3) var(--sp-4);
+    background: rgba(0, 0, 0, 0.2);
+    border-top: 1px solid var(--b2);
+    border-bottom: 1px solid var(--b2);
 }
 
 /* ── Divider ── */
-.board-divider{display:flex;align-items:center;justify-content:center;padding:2px 0;position:relative;background:rgba(0,0,0,0.2)}
-.board-divider::before,.board-divider::after{content:'';flex:1;height:1px;background:var(--b3)}
-.divider-icon{padding:0 var(--sp-3);font-size:1rem;color:var(--text-4)}
+.board-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px 0;
+    position: relative;
+    background: rgba(0, 0, 0, 0.2)
+}
+
+.board-divider::before,
+.board-divider::after {
+    content: '';
+    flex: 1;
+    height: 2px;
+    background: var(--surface);
+}
+
+.divider-icon {
+    padding: 0 var(--sp-3);
+    font-size: 1rem;
+    color: var(--text-4)
+}
 
 /* ── Dice row ── */
-.dice-row{display:grid;grid-template-columns:repeat(6,1fr);gap:3px}
+.dice-row {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 3px
+}
 
 /* Attack row — same 6-col grid as home row */
-.dice-row--attack{
-    display:grid;grid-template-columns:repeat(6,1fr);gap:3px;
+.dice-row--attack {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 3px;
 }
 
 /* ── Attack slot (empty) — same size as a die ── */
-.attack-slot{
-    min-height:80px;
-    border-radius:var(--r-sm);
-    border:2px dashed var(--b2);
-    opacity:0.25;
+.attack-slot {
+    min-height: 80px;
+    border-radius: var(--r-sm);
+    border: 2px dashed var(--b2);
+    opacity: 0.25;
 }
 
 /* ── Attack die (filled slot) ── */
-.attack-die{
-    display:flex;flex-direction:column;align-items:center;justify-content:center;
-    border-radius:var(--r-sm);position:relative;
-    min-height:80px;
-    padding:var(--sp-1) 4px;
-    border:2px solid transparent;
-    animation:slot-in 0.25s var(--ease);
+.attack-die {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--r-sm);
+    position: relative;
+    min-height: 80px;
+    padding: var(--sp-1) 4px;
+    animation: slot-in 0.25s var(--ease);
+    background: transparent;
+    border: none;
 }
-.attack-die.you-die{border-color:var(--amber);box-shadow:0 0 0 1px var(--amber),inset 0 0 8px rgba(240,192,64,0.1)}
-.attack-die.opp-die{border-color:var(--red);box-shadow:0 0 0 1px var(--red),inset 0 0 8px rgba(224,64,64,0.1)}
+
+.attack-die.you-die,
+.attack-die.opp-die {
+    border: none;
+    box-shadow: none;
+}
+
 /* Bg from home die type */
-.attack-die:nth-child(odd){background:var(--sq-dark)}
-.attack-die:nth-child(even){background:var(--sq-light)}
-.attack-die:nth-child(even) .die-value{color:#333}
-.attack-die:nth-child(even) .die-label{color:#666}
+.attack-die:nth-child(odd) {
+    background: transparent
+}
 
-@keyframes slot-in{0%{opacity:0;transform:translateY(8px) scale(0.9)}100%{opacity:1;transform:translateY(0) scale(1)}}
+.attack-die:nth-child(even) {
+    background: transparent
+}
 
-.attack-die .die-value{font-family:var(--f-mono);font-size:clamp(1.3rem,3vw,1.9rem);font-weight:800;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,0.3)}
-.attack-die .die-label{font-size:var(--fs-2xs);font-weight:700;color:rgba(255,255,255,0.5)}
-.attack-die::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;border-radius:var(--r-sm) var(--r-sm) 0 0}
+.attack-die .die-value,
+.attack-die .die-label {
+    display: none;
+}
+
+@keyframes slot-in {
+    0% {
+        opacity: 0;
+        transform: translateY(8px) scale(0.9)
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1)
+    }
+}
+
+.attack-die .die-value {
+    font-family: var(--f-mono);
+    font-size: clamp(1.3rem, 3vw, 1.9rem);
+    font-weight: 800;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3)
+}
+
+.attack-die .die-label {
+    font-size: var(--fs-2xs);
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.5)
+}
+
+.attack-die::before {
+    display: none;
+}
 
 
 /* ── Home row die ── */
-.die{
-    display:flex;flex-direction:column;align-items:center;justify-content:center;
-    border-radius:var(--r-sm);cursor:pointer;position:relative;
-    min-height:80px;padding:var(--sp-2) 4px;
-    transition:all var(--dur) var(--ease);border:2px solid transparent;
+.die {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--r-sm);
+    cursor: pointer;
+    position: relative;
+    min-height: 80px;
+    padding: var(--sp-2) 4px;
+    transition: all var(--dur) var(--ease);
+    border: 2px solid transparent;
+    background: transparent;
 }
-.die:nth-child(odd){background:var(--sq-dark)}
-.die:nth-child(even){background:var(--sq-light)}
-.die:nth-child(even) .die-value{color:#333}
-.die:nth-child(even) .die-label{color:#666}
 
-.die:hover:not(.captured):not(.in-attack){filter:brightness(1.1);transform:scale(1.03)}
+.die:hover:not(.captured):not(.in-attack) {
+    filter: brightness(1.1);
+    transform: scale(1.05);
+}
 
-.die.selected{border-color:var(--amber);box-shadow:0 0 0 2px var(--amber),inset 0 0 12px rgba(240,192,64,0.15)}
-.die.in-attack{opacity:0.3;cursor:default;transform:none !important;filter:grayscale(0.5) !important}
-.die.target{border-color:var(--red);box-shadow:0 0 0 2px var(--red),inset 0 0 12px rgba(224,64,64,0.15)}
+/* Selection rings now handled in dice.css via stroke/filter, but we keep some container styles */
+.die.selected {
+    /* Handled in dice.css mainly */
+    position: relative;
+    /* Maintain positioning context */
+}
 
-.die-value{font-family:var(--f-mono);font-size:clamp(1.3rem,3vw,1.9rem);font-weight:800;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,0.3)}
-.die.captured .die-value{color:var(--text-4);text-shadow:none}
-.die-label{font-size:var(--fs-2xs);font-weight:700;color:rgba(255,255,255,0.6);letter-spacing:0.04em;margin-top:1px}
+.die.in-attack {
+    opacity: 0.3;
+    cursor: default;
+    transform: none !important;
+    filter: grayscale(0.5) !important;
+}
 
-.die::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:var(--r-sm) var(--r-sm) 0 0}
+.die.target {
+    /* Handled in dice.css */
+    position: relative;
+    /* Maintain positioning context */
+}
 
-.die.rolling{animation:die-roll 0.35s var(--ease)}
-@keyframes die-roll{0%{transform:scale(1)}30%{transform:scale(0.85);opacity:0.5}70%{transform:scale(1.05)}100%{transform:scale(1);opacity:1}}
+/* Old text styles - only used for captured state now */
+.die-value {
+    font-family: var(--f-mono);
+    font-size: clamp(1.3rem, 3vw, 1.9rem);
+    font-weight: 800;
+    color: var(--text-4);
+}
+
+.die-label {
+    font-size: var(--fs-2xs);
+    font-weight: 700;
+    color: var(--text-4);
+    letter-spacing: 0.04em;
+    margin-top: 1px;
+}
+
+/* Remove top border bar */
+.die::before {
+    display: none;
+}
+
+.die.rolling {
+    animation: die-roll 0.35s var(--ease);
+}
+
+@keyframes die-roll {
+    0% {
+        transform: scale(1);
+    }
+
+    30% {
+        transform: scale(0.85);
+        opacity: 0.5;
+    }
+
+    70% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
 
 /* ═══════ MOBILE ═══════ */
-@media(max-width:860px){
-    .game-layout{grid-template-columns:1fr;max-width:500px;margin:0 auto;padding:var(--sp-1);padding-bottom:0;gap:0;min-height:auto}
-    .board-column{align-self:start}
-    .board-zone{padding:var(--sp-1) var(--sp-2)}
+@media(max-width:860px) {
+    .game-layout {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+        margin: 0 auto;
+        padding: var(--sp-1);
+        padding-bottom: 0;
+        gap: 0;
+        min-height: 100dvh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        /* Push controls to bottom */
+    }
+
+    .board-column {
+        align-self: start
+    }
+
+    .board-zone {
+        padding: var(--sp-1) var(--sp-2)
+    }
+
     /* Attack zones — match home row */
-    .board-zone--opp-attack,.board-zone--you-attack{padding:var(--sp-1) var(--sp-2)}
-    .attack-slot{min-height:54px}
-    .attack-die{min-height:54px}
-    .attack-die .die-value{font-size:clamp(1rem,5vw,1.3rem)}
-    .attack-die .die-label{font-size:0.5rem}    .board-divider{padding:1px 0}
-    .divider-icon{font-size:0.75rem;padding:0 var(--sp-2)}
+    .board-zone--opp-attack,
+    .board-zone--you-attack {
+        padding: var(--sp-1) var(--sp-2)
+    }
+
+    .attack-slot {
+        min-height: 54px
+    }
+
+    .attack-die {
+        min-height: 54px
+    }
+
+    .attack-die .die-value {
+        font-size: clamp(1rem, 5vw, 1.3rem)
+    }
+
+    .attack-die .die-label {
+        font-size: 0.5rem
+    }
+
+    .board-divider {
+        padding: 1px 0
+    }
+
+    .divider-icon {
+        font-size: 0.75rem;
+        padding: 0 var(--sp-2)
+    }
+
     /* Dice — bigger touch targets */
-    .die{min-height:54px;padding:var(--sp-1) 2px}
-    .die-value{font-size:clamp(1rem,5vw,1.3rem)}
-    .die-label{font-size:0.55rem}
+    .die {
+        min-height: 54px;
+        padding: var(--sp-1) 2px
+    }
+
+    .die-value {
+        font-size: clamp(1rem, 5vw, 1.3rem)
+    }
+
+    .die-label {
+        font-size: 0.55rem
+    }
+
     /* Player bars */
-    .player-bar{padding:var(--sp-1) var(--sp-2)}
-    .avatar{width:26px;height:26px;font-size:var(--fs-2xs)}
-    .bar-name{font-size:var(--fs-xs)}
-    .bar-dice{font-size:var(--fs-xs)}
-    .board-label{font-size:0.55rem;padding:1px 0}
+    .player-bar {
+        padding: var(--sp-1) var(--sp-2)
+    }
+
+    .avatar {
+        width: 26px;
+        height: 26px;
+        font-size: var(--fs-2xs)
+    }
+
+    .bar-name {
+        font-size: var(--fs-xs)
+    }
+
+    .bar-dice {
+        font-size: var(--fs-xs)
+    }
+
+    .board-label {
+        font-size: 0.55rem;
+        padding: 1px 0
+    }
 }

@@ -102,12 +102,19 @@
         });
     });
 
-    // ── Luck slider ──
-    document.getElementById('luckSlider').addEventListener('input', (e) => {
+    // ── Luck sliders ──
+    const luckLabels = { '-3': 'Very Unlucky', '-2': 'Unlucky', '-1': 'Slightly Unlucky', '0': 'Neutral', '1': 'Slightly Lucky', '2': 'Lucky', '3': 'Very Lucky' };
+
+    document.getElementById('luckSliderYou').addEventListener('input', (e) => {
         const v = parseInt(e.target.value);
-        settings.luck = v;
-        const labels = { '-3':'Very Unlucky', '-2':'Unlucky', '-1':'Slightly Unlucky', '0':'Neutral', '1':'Slightly Lucky', '2':'Lucky', '3':'Very Lucky' };
-        document.getElementById('luckValue').textContent = labels[v] || 'Neutral';
+        settings.luckYou = v;
+        document.getElementById('luckValueYou').textContent = luckLabels[v] || 'Neutral';
+    });
+
+    document.getElementById('luckSliderOpp').addEventListener('input', (e) => {
+        const v = parseInt(e.target.value);
+        settings.luckOpp = v;
+        document.getElementById('luckValueOpp').textContent = luckLabels[v] || 'Neutral';
     });
 
     // ── Settings modal ──
@@ -332,8 +339,8 @@ function renderStats() {
                 <span class="stat-label">${s.wins}W – ${s.losses}L</span>
             </div>
             <div class="stat-bar">
-                <div class="stat-bar-fill win" style="width:${total > 0 ? (s.wins/total)*100 : 0}%"></div>
-                <div class="stat-bar-fill loss" style="width:${total > 0 ? (s.losses/total)*100 : 0}%"></div>
+                <div class="stat-bar-fill win" style="width:${total > 0 ? (s.wins / total) * 100 : 0}%"></div>
+                <div class="stat-bar-fill loss" style="width:${total > 0 ? (s.losses / total) * 100 : 0}%"></div>
             </div>
         </div>
         <div class="stat-card">

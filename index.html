@@ -52,7 +52,8 @@
     <link rel="stylesheet" href="css/board.css">
     <link rel="stylesheet" href="css/panel.css">
     <link rel="stylesheet" href="css/modal.css">
-    <link rel="stylesheet" href="css/dither.css">
+    <link rel="stylesheet" href="css/modal.css">
+    <link rel="stylesheet" href="css/dice.css">
 
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -79,7 +80,6 @@
         }
     }
     </script>
-    <script src="js/dither.js" defer></script>
     <script src="js/waves.js" defer></script>
     <script src="js/sound.js" defer></script>
     <script src="js/stats.js" defer></script>
@@ -116,6 +116,7 @@
                 <button class="home-tab active" data-tab="play">Play</button>
                 <button class="home-tab" data-tab="stats">Stats</button>
                 <button class="home-tab" data-tab="howto">How to Play</button>
+                <button class="home-tab" data-tab="about">About</button>
             </nav>
 
             <!-- TAB: Play -->
@@ -174,6 +175,27 @@
                         <button class="move-preset" data-seconds="10">10s</button>
                         <button class="move-preset" data-seconds="15">15s</button>
                         <button class="move-preset" data-seconds="30">30s</button>
+                    </div>
+
+                    <!-- TAB: About -->
+                    <div class="tab-panel" id="tabAbout">
+                        <div class="howto">
+                            <p style="margin-bottom: 1rem">Maths Warriors was created by Henry Ong, Founder of
+                                International Scholastic Trust and SIMCC in 2004 to help students improve in mental
+                                sums.</p>
+                            <p style="margin-bottom: 1rem">It has been used to train over 100,000 students around the
+                                world to compute faster and think strategically to outwit their opponents. Maths
+                                Warriors is used in the Singapore International Math Olympiad Challenge (SIMOC) and
+                                Singapore National Primary Schools Maths Warriors Challenge since 2004. It will soon be
+                                launched in Cambodia and other countries as a national math competition.</p>
+                            <p style="margin-bottom: 1rem">Maths Warriors game consists of 2 sets of 6 dice (4, 6, 8,
+                                10, 12 & 20 sided) for 2 players/teams to challenge each other to capture all their
+                                opponents dice within the best of 3 rounds to emerge as the winner.</p>
+                            <p>You can learn how to play the game at:<br>
+                                <a href="https://www.youtube.com/watch?v=UtxP1o-moA8" target="_blank" rel="noopener"
+                                    style="color:var(--green)">https://www.youtube.com/watch?v=UtxP1o-moA8</a>
+                            </p>
+                        </div>
                     </div>
                 </div>
                 <div class="home-actions">
@@ -291,14 +313,22 @@
                     </div>
                 </div>
                 <div class="setting-group">
-                    <label class="setting-label">Luck Factor <span class="field-hint">adjusts roll
-                            probability</span></label>
+                    <label class="setting-label">Player 1 (You) Luck Factor</label>
                     <div class="luck-slider-wrap">
-                        <span class="luck-label-end">🍀 Unlucky</span>
-                        <input type="range" class="luck-slider" id="luckSlider" min="-3" max="3" value="0" step="1">
-                        <span class="luck-label-end">Lucky 🎯</span>
+                        <span class="luck-label-end">Unlucky</span>
+                        <input type="range" class="luck-slider" id="luckSliderYou" min="-3" max="3" value="0" step="1">
+                        <span class="luck-label-end">Lucky</span>
                     </div>
-                    <div class="luck-value" id="luckValue">Neutral</div>
+                    <div class="luck-value" id="luckValueYou">Neutral</div>
+                </div>
+                <div class="setting-group">
+                    <label class="setting-label">Player 2 (CPU) Luck Factor</label>
+                    <div class="luck-slider-wrap">
+                        <span class="luck-label-end">Unlucky</span>
+                        <input type="range" class="luck-slider" id="luckSliderOpp" min="-3" max="3" value="0" step="1">
+                        <span class="luck-label-end">Lucky</span>
+                    </div>
+                    <div class="luck-value" id="luckValueOpp">Neutral</div>
                 </div>
             </div>
         </div>
