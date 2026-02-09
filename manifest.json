@@ -2,7 +2,7 @@
     "name": "Maths Warriors",
     "short_name": "MathWars",
     "description": "Strategic 1v1 dice battle game. Capture opponent dice using strength or math-based mind attacks.",
-    "start_url": "/math-warriors/",
+    "start_url": "/",
     "display": "standalone",
     "background_color": "#262421",
     "theme_color": "#262421",
