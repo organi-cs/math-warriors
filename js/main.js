@@ -233,8 +233,8 @@
 /* ═══════ HELPERS ═══════ */
 
 function capitalize(s) {
-    const map = { play: 'Play', stats: 'Stats', howto: 'Howto' };
-    return map[s] || s;
+    if (!s) return '';
+    return s.charAt(0).toUpperCase() + s.slice(1);
 }
 
 function savePlayerName() {
